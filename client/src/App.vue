@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <router-link to="articles/showall"> Show All Article </router-link>
     <router-view></router-view>
   </div>
 </template>

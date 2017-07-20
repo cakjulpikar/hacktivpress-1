@@ -9,7 +9,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/articles/showall',
+      path: '/',
       name: 'ShowAll',
       components: ShowAll
     },

@@ -36,8 +36,7 @@ export default {
     }
   },
   created: function () {
-    var self = this
-    self.getArticles()
+    this.getArticles()
   }
 }
 </script>

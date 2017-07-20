@@ -6,5 +6,6 @@ router.post('/', jwtVerify.userVerify, controller.postArticle)
 router.get('/', controller.getArticles)
 router.get('/:id', controller.getArticle)
 router.delete('/:id', jwtVerify.userVerify, controller.deleteArticle)
+router.put('/:id', jwtVerify.userVerify, controller.updateArticle)
 
 module.exports = router;

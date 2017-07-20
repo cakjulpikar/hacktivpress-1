@@ -47,18 +47,41 @@ const deleteArticle = function (req,res) {
     author: req.decoded._id,
     _id: ObjectId(req.params.id)
   }, function (err,result) {
-    result.remove(function (err,deleted) {
-      if (err) {
-        res.status(500).send(err)
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      if (!result) {
+        res.send({msg: 'Article or author not found'})
       } else {
-        res.send("This article delete"  + deleted)
+        result.remove(function (err,deleted) {
+          if (err) {
+            res.status(500).send(err)
+          } else {
+            res.send("Article deleted" + deleted)
+          }
+        })
       }
-    })
+    }
   })
 }
+
+const updateArticle = function (req,res) {
+  Article.update({
+    author: req.decoded._id,
+    _id: ObjectId(req.params.id)
+  }, req.body, function (err,result) {
+    if (err) {
+      res.status(500).send(err)
+    } else {
+      res.send(result)
+    }
+  })
+}
+
 module.exports = {
   postArticle,
   getArticles,
   getArticle,
-  deleteArticle
+  deleteArticle,
+  updateArticle
 };

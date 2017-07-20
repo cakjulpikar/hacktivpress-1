@@ -11,8 +11,19 @@
           <div v-if='isLogin === false' class="nav-right nav-menu">
             <input v-model='usernameLogin' class="input nav-item login-form" type="text" placeholder="Username">
             <input v-model='passwordLogin' class="input nav-item login-form" type="password" placeholder="Password">
-            <button class="button navBtn" type="button"> Login </button>
+            <button @click="logIn" class="button navBtn" type="button"> Login </button>
             <button class="button navBtn" type="button" name="button"> <router-link to="/users/signup">  Sign Up </router-link></button>
+          </div>
+          <div v-if='isLogin === true' class="nav-right nav-menu">
+            <div class="nav-item">
+              <a> Hello, {{currUsername}} </a>
+            </div>
+            <div class="nav-item">
+              <button class="button" type="button"> Post Article </button>
+            </div>
+            <div class="nav-item">
+              <button class="button is-danger" type="button"> Log Out</button>
+            </div>
           </div>
         </div>
       </header>
@@ -26,7 +37,8 @@ export default {
   data () {
     return {
       usernameLogin: '',
-      passwordLogin: ''
+      passwordLogin: '',
+      currUsername: ''
     }
   },
   computed: {
@@ -37,17 +49,22 @@ export default {
   methods: {
     logIn: function () {
       var self = this
-      axios.post('localhost:3000/api/users/signin', {
+      axios.post('http://localhost:3000/api/users/signin', {
         username: self.usernameLogin,
         password: self.passwordLogin
       })
       .then(function (loginResult) {
         self.$store.commit('isLogin', true)
+        self.currUsername = loginResult.data.username
         window.localStorage.setItem('token', loginResult.data.token)
       })
       .catch(function (err) {
         console.log(err)
       })
+    },
+    logOut: function () {
+      window.localStorage.removeItem('token')
+      this.$router.push('/')
     }
   }
 }

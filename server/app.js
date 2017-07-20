@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
@@ -8,6 +9,7 @@ const app = express()
 const users = require('./routes/users')
 const articles = require('./routes/articles')
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:false}))
 

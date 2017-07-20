@@ -19,7 +19,7 @@
               <a> Hello, {{currUsername}} </a>
             </div>
             <div class="nav-item">
-              <button class="button" type="button"> Post Article </button>
+              <button class="button" type="button"> <router-link to="/articles/post">  Post Article</router-link></button>
             </div>
             <div class="nav-item">
               <button class="button is-danger" type="button"> Log Out</button>
@@ -64,7 +64,8 @@ export default {
     },
     logOut: function () {
       window.localStorage.removeItem('token')
-      this.$router.push('/')
+      this.$router.go(0)
+      this.$store.commit('isLogin', false)
     }
   }
 }

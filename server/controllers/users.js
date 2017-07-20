@@ -26,7 +26,7 @@ const signIn = function (req,res) {
         res.send({msg: 'Username not found'})
       } else {
         if (result.password === hash(req.body.password)) {
-          res.send({token: jwt.sign({_id: findOne._id}, process.env.JWT)})
+          res.send({token: jwt.sign({_id: result._id}, process.env.JWT)})
         } else {
           res.status(401).send({msg: 'Password wrong!'})
         }
@@ -34,6 +34,7 @@ const signIn = function (req,res) {
     }
   })
 }
+
 module.exports = {
   signUp,
   signIn

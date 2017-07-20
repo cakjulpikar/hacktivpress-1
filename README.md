@@ -32,7 +32,7 @@ A simple blog aplication with Express.js, MongoDB and Vue.js
 ### Users
 | Route | Method | Usage | Result |
 | :--- | :---: | :--- | :--- |
-| /api/signup | POST | Send url-encoded-form with username, email, password as attributes | Created user |
+| /api/signup | POST | Send url-encoded-form with username and password as attributes | Created user |
 |/api/signin | POST | Send url-encoded-form with username and password | Token with user data (id and username) |
 
 ### Articles
